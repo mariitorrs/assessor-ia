@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420"><defs><pattern id="gingham" width="32" height="32" patternUnits="userSpaceOnUse"><rect width="32" height="32" fill="#edf1d2"/><path d="M0 8H32M8 0V32" stroke="#a8c27a" stroke-width="16" opacity=".27"/></pattern><pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.3" fill="#fffdf2" opacity=".65"/></pattern></defs><rect width="1200" height="420" rx="26" fill="url(#gingham)"/><rect x="35" y="35" width="1130" height="350" rx="24" fill="#fffdf2" stroke="#dce1bf" stroke-width="2"/><rect x="35" y="35" width="300" height="350" rx="24" fill="#b9df72"/><rect x="35" y="35" width="300" height="350" rx="24" fill="url(#dots)"/><path d="M335 60V360" stroke="#8baa67" stroke-dasharray="5 7"/><g transform="rotate(-5 590 44)"><rect x="507" y="22" width="166" height="34" fill="#f1cf63" opacity=".6"/></g><text x="399" y="104" font-family="DejaVu Sans,sans-serif" font-size="16" letter-spacing="4" fill="#6f974d">SEU CANTINHO DE ORGANIZAÇÃO</text><text x="393" y="190" font-family="DejaVu Sans,sans-serif" font-weight="bold" font-size="74" letter-spacing="-4" fill="#35553b">Assessor<tspan fill="#be5046">.ai</tspan></text><text x="399" y="241" font-family="DejaVu Sans,sans-serif" font-size="24" fill="#35553b">Finanças e compromissos</text><text x="399" y="275" font-family="DejaVu Sans,sans-serif" font-size="24" fill="#35553b">em uma conversa só.</text><rect x="399" y="310" width="142" height="34" rx="17" fill="#eaf2d3"/><text x="470" y="332" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#35553b">agentes de IA</text><rect x="552" y="310" width="181" height="34" rx="17" fill="#f8e8de"/><text x="642" y="332" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#983f38">memória + contexto</text><rect x="744" y="310" width="197" height="34" rx="17" fill="#f6edc7"/><text x="842" y="332" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="13" fill="#6c6033">respostas com evidência</text><g transform="rotate(-7 184.5 204.5)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" x="79" y="99" width="211" height="211">
+  <defs>
+    <pattern id="cloth" width="7" height="7" patternUnits="userSpaceOnUse">
+      <rect width="7" height="7" fill="#c95749"/>
+      <path d="M0 1.5H7M0 5.5H7M1.5 0V7M5.5 0V7" stroke="#d96c60" stroke-width=".7" opacity=".38"/>
+    </pattern>
+    <pattern id="leafcloth" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="#8bae5d"/>
+      <path d="M0 3H6M3 0V6" stroke="#a7c47c" stroke-width=".6" opacity=".45"/>
+    </pattern>
+  </defs>
+  <path d="M88 37c10-16 26-20 40-15-7 18-21 28-39 27" fill="url(#leafcloth)" stroke="#557c42" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M79 46c2-11 4-19 3-27" fill="none" stroke="#77533b" stroke-width="7" stroke-linecap="round"/>
+  <path d="M82 48C58 34 34 46 27 74c-9 40 18 69 54 65 34 8 61-19 54-61-6-28-29-43-53-30Z" fill="url(#cloth)" stroke="#9e4037" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M37 69c10-13 23-17 36-15" fill="none" stroke="#f1a198" stroke-width="6" stroke-linecap="round" opacity=".65"/>
+  <path d="M51 123c18 10 42 12 64 1" fill="none" stroke="#f8e4d8" stroke-width="2.2" stroke-dasharray="4 5" opacity=".78"/>
+  <circle cx="63" cy="91" r="4.5" fill="#35503b"/>
+  <circle cx="102" cy="91" r="4.5" fill="#35503b"/>
+  <path d="M71 107c8 7 17 7 25 0" fill="none" stroke="#35503b" stroke-width="4" stroke-linecap="round"/>
+</svg></g><g transform="rotate(9 1069.0 104.0)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 80" x="1014" y="61" width="110" height="86">
+  <defs>
+    <pattern id="g" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#f6f1df"/>
+      <rect width="8" height="16" fill="#7fa05c" opacity=".52"/>
+      <rect width="16" height="8" fill="#7fa05c" opacity=".52"/>
+    </pattern>
+  </defs>
+  <path d="M64 38C44 15 17 12 8 31c-7 15 11 28 31 24 9-2 18-8 25-17Z" fill="url(#g)" stroke="#5f7d4d" stroke-width="3"/>
+  <path d="M76 38c20-23 47-26 56-7 7 15-11 28-31 24-9-2-18-8-25-17Z" fill="url(#g)" stroke="#5f7d4d" stroke-width="3"/>
+  <ellipse cx="70" cy="39" rx="14" ry="11" fill="#789955" stroke="#587246" stroke-width="3"/>
+  <path d="M58 47 45 75 66 62M82 47l13 28-21-13" fill="url(#g)" stroke="#5f7d4d" stroke-width="3" stroke-linejoin="round"/>
+</svg></g><g transform="rotate(-10 1087.0 315.0)"><svg xmlns="http://www.w3.org/2000/svg" width="78" height="78" viewBox="0 0 100 100" fill="none" x="1048" y="276">
+  <g stroke="#FFFDF2" stroke-width="5" stroke-linejoin="round">
+    <path d="M50 42C28 10 8 34 31 51C7 65 29 91 51 63C65 92 91 69 68 51C92 34 70 11 50 42Z" fill="#F2E28A"/>
+    <circle cx="50" cy="52" r="11" fill="#B9D36A"/>
+  </g>
+</svg></g><g transform="rotate(-12 90.0 81.0)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" x="63" y="54" width="54" height="54">
+  <path d="M50 7 61 35 92 36 68 55 76 86 50 68 24 86 32 55 8 36 39 35Z" fill="#91b663" stroke="#5d7f47" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M50 14 59 39 85 40 65 56 71 78 50 65 29 78 35 56 15 40 41 39Z" fill="none" stroke="#e7f0cb" stroke-width="2" stroke-dasharray="4 4" opacity=".9"/>
+</svg></g></svg>

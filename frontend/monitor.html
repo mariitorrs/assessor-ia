@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Assessor.AI — Monitoramento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1118;
+      --panel: #111a24;
+      --panel-2: #16222e;
+      --line: #263544;
+      --text: #edf4f7;
+      --muted: #91a4b3;
+      --dim: #607383;
+      --mint: #67e8c4;
+      --green: #7ee2a8;
+      --red: #ff837a;
+      --amber: #f6c66e;
+      --mono: "DM Mono", Consolas, monospace;
+      --sans: "Manrope", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; color: var(--text); font-family: var(--sans);
+      background: radial-gradient(ellipse at 10% 0%, #14302f 0, transparent 34%), var(--bg);
+    }
+    main { width: min(1160px, calc(100% - 36px)); margin: 0 auto; padding: 30px 0 54px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 22px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--dim); }
+    .dot.ok { background: var(--green); box-shadow: 0 0 0 5px #7ee2a81c; }
+    .dot.error { background: var(--red); box-shadow: 0 0 0 5px #ff837a1c; }
+    h1 { margin: 0; font-size: 1.05rem; font-weight: 700; letter-spacing: -.02em; }
+    h1 span { color: var(--mint); }
+    .subtitle { margin: 5px 0 0; color: var(--muted); font-size: .78rem; }
+    .actions { display: flex; align-items: center; gap: 9px; }
+    .actions a, .actions button {
+      border: 1px solid #67e8c455; border-radius: 999px; padding: 8px 13px;
+      background: #67e8c412; color: var(--mint); font: 500 11px var(--mono);
+      text-decoration: none; cursor: pointer;
+    }
+    .actions a:hover, .actions button:hover { background: #67e8c426; }
+    .slo, .panel, .metric {
+      border: 1px solid var(--line); border-radius: 13px; background: #111a24ed;
+    }
+    .slo { padding: 15px 18px; margin-bottom: 20px; }
+    .slo.ok { border-color: #7ee2a866; background: #183025; }
+    .slo.bad { border-color: #ff837a77; background: #321f23; }
+    .slo strong { font: 500 11px var(--mono); letter-spacing: .09em; text-transform: uppercase; }
+    .slo p { margin: 5px 0 0; color: var(--muted); font-size: .82rem; }
+    .section-label { margin: 20px 0 8px; color: var(--dim); font: 500 10px var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 9px; }
+    .metric { padding: 12px 14px; min-width: 0; }
+    .metric-label { color: var(--muted); font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; }
+    .metric-value { margin-top: 6px; font: 500 1.08rem var(--mono); overflow-wrap: anywhere; }
+    .metric-value.compact { font-size: .82rem; }
+    .metric-note { margin-top: 4px; color: var(--dim); font-size: .66rem; }
+    .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+    .panel { overflow: hidden; }
+    .panel h2 { margin: 0; padding: 13px 15px 0; color: var(--muted); font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+    canvas { display: block; width: 100%; height: 190px; }
+    .table-panel { margin-top: 10px; }
+    .scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .75rem; }
+    th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+    th { color: var(--dim); font: 500 9px var(--mono); letter-spacing: .09em; text-transform: uppercase; }
+    td { color: var(--text); font-variant-numeric: tabular-nums; }
+    td.mono { font-family: var(--mono); font-size: .68rem; }
+    .status { display: inline-block; border-radius: 999px; padding: 2px 7px; font: 500 9px var(--mono); text-transform: uppercase; }
+    .status.ok { color: var(--green); background: #7ee2a81a; }
+    .status.erro { color: var(--red); background: #ff837a1a; }
+    .status.bloqueado { color: var(--amber); background: #f6c66e1a; }
+    .empty { margin: 0; padding: 14px; color: var(--dim); font-size: .78rem; }
+    .warning { margin: 15px 0 0; color: var(--red); font-size: .82rem; }
+    @media (max-width: 720px) {
+      main { width: min(100% - 24px, 600px); padding-top: 20px; }
+      header { align-items: flex-start; flex-direction: column; }
+      .charts { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <div class="brand"><span class="dot" id="connection-dot"></span><h1>assessor.ai <span>/ monitor</span></h1></div>
+        <p class="subtitle" id="updated-at" aria-live="polite">Conectando à API...</p>
+      </div>
+      <nav class="actions" aria-label="Ações">
+        <a href="index.html">Voltar ao chat</a>
+        <button type="button" id="refresh">Atualizar</button>
+      </nav>
+    </header>
+
+    <section class="slo" id="slo" aria-live="polite">
+      <strong id="slo-title">SLO</strong>
+      <p id="slo-copy">Latência p95 e taxa de erro desta execução.</p>
+    </section>
+
+    <p class="section-label">Serviço</p>
+    <section class="metrics" id="service-metrics" aria-label="Métricas do serviço"></section>
+    <p class="section-label">Modelos</p>
+    <section class="metrics" id="model-metrics" aria-label="Métricas dos modelos"></section>
+
+    <section class="charts" aria-label="Séries de métricas">
+      <article class="panel"><h2>Latência por turno</h2><canvas id="latency-chart" aria-label="Gráfico de latência por turno"></canvas></article>
+      <article class="panel"><h2>Custo acumulado</h2><canvas id="cost-chart" aria-label="Gráfico de custo acumulado"></canvas></article>
+    </section>
+
+    <article class="panel table-panel"><h2>Turnos</h2><div class="scroll" id="turns-table"></div></article>
+    <article class="panel table-panel"><h2>Por modelo</h2><div class="scroll" id="models-table"></div></article>
+    <article class="panel table-panel"><h2>Por rota</h2><div class="scroll" id="routes-table"></div></article>
+    <p class="warning" id="warning" role="status" hidden></p>
+  </main>
+
+  <script>
+    const byId = (id) => document.getElementById(id);
+    const integer = new Intl.NumberFormat("pt-BR");
+    const usdFormat = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "USD", minimumFractionDigits: 4, maximumFractionDigits: 6 });
+    let lastData = null;
+
+    function esc(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" })[char]);
+    }
+    function ms(value) {
+      return value >= 1000 ? `${(value / 1000).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} s` : `${Math.round(value).toLocaleString("pt-BR")} ms`;
+    }
+    function pct(value) { return `${(value * 100).toLocaleString("pt-BR", { maximumFractionDigits: 1 })}%`; }
+    function duration(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const remainder = seconds % 60;
+      return minutes ? `${minutes} min ${remainder} s` : `${remainder} s`;
+    }
+    function card(label, value, note = "", compact = false) {
+      return `<article class="metric"><div class="metric-label">${esc(label)}</div><div class="metric-value${compact ? " compact" : ""}">${esc(value)}</div>${note ? `<div class="metric-note">${esc(note)}</div>` : ""}</article>`;
+    }
+    function table(columns, rows, empty) {
+      if (!rows.length) return `<p class="empty">${esc(empty)}</p>`;
+      const head = columns.map((column) => `<th>${esc(column)}</th>`).join("");
+      const body = rows.map((row) => `<tr>${row.map((cell) => `<td class="${esc(cell.className || "")}">${cell.html || esc(cell.value)}</td>`).join("")}</tr>`).join("");
+      return `<table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
+    }
+    function statusTag(status) {
+      const safe = ["ok", "erro", "bloqueado"].includes(status) ? status : "erro";
+      return `<span class="status ${safe}">${safe}</span>`;
+    }
+    function drawLine(canvas, points, color, limit, currency = false) {
+      const ctx = canvas.getContext("2d");
+      const ratio = window.devicePixelRatio || 1;
+      const width = canvas.clientWidth || 320;
+      const height = canvas.clientHeight || 190;
+      canvas.width = Math.floor(width * ratio);
+      canvas.height = Math.floor(height * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ctx.clearRect(0, 0, width, height);
+      if (!points.length) {
+        ctx.fillStyle = "#607383";
+        ctx.font = "12px Manrope, sans-serif";
+        ctx.fillText("Ainda não há turnos", 14, height / 2);
+        return;
+      }
+      const values = points.map((point) => point.value);
+      const min = Math.min(...values, 0);
+      let max = Math.max(...values);
+      if (limit != null) max = Math.max(max, limit);
+      const pad = { left: 58, right: 14, top: 16, bottom: 24 };
+      const range = Math.max(max - min, 1);
+      const x = (index) => pad.left + (points.length === 1 ? (width - pad.left - pad.right) / 2 : index / (points.length - 1) * (width - pad.left - pad.right));
+      const y = (value) => pad.top + (1 - (value - min) / range) * (height - pad.top - pad.bottom);
+      ctx.strokeStyle = "#263544";
+      ctx.beginPath(); ctx.moveTo(pad.left, pad.top); ctx.lineTo(pad.left, height - pad.bottom); ctx.lineTo(width - pad.right, height - pad.bottom); ctx.stroke();
+      ctx.fillStyle = "#91a4b3"; ctx.font = "10px DM Mono, monospace";
+      const label = (value) => currency ? usdFormat.format(value) : Math.round(value).toLocaleString("pt-BR");
+      ctx.fillText(label(max), 4, pad.top + 4);
+      ctx.fillText(label(min), 4, height - pad.bottom);
+      if (limit != null) {
+        ctx.setLineDash([4, 4]); ctx.strokeStyle = "#ff837a";
+        ctx.beginPath(); ctx.moveTo(pad.left, y(limit)); ctx.lineTo(width - pad.right, y(limit)); ctx.stroke(); ctx.setLineDash([]);
+      }
+      ctx.beginPath();
+      points.forEach((point, index) => index ? ctx.lineTo(x(index), y(point.value)) : ctx.moveTo(x(index), y(point.value)));
+      ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.stroke();
+      ctx.fillStyle = color;
+      points.forEach((point, index) => { ctx.beginPath(); ctx.arc(x(index), y(point.value), 3, 0, Math.PI * 2); ctx.fill(); });
+    }
+    function render(data) {
+      lastData = data;
+      const summary = data.resumo;
+      const slo = data.slo;
+      const box = byId("slo");
+      box.classList.remove("ok", "bad");
+      if (!summary.turnos) {
+        byId("slo-title").textContent = "Sem turnos";
+        byId("slo-copy").textContent = "Envie uma mensagem pelo chat para iniciar o registro deste processo.";
+      } else {
+        box.classList.add(summary.slo_ok ? "ok" : "bad");
+        byId("slo-title").textContent = summary.slo_ok ? "Dentro do SLO" : "SLO excedido";
+        byId("slo-copy").textContent = `Limites: p95 de ${ms(slo.latencia_p95_limite_ms)} e erro de ${pct(slo.taxa_erro_limite)}.`;
+      }
+      byId("service-metrics").innerHTML = [
+        card("Turnos", integer.format(summary.turnos)),
+        card("Taxa de erro", pct(summary.taxa_erro), "Exceções no turno"),
+        card("Latência média", ms(summary.latencia_media_ms)),
+        card("Latência p95", ms(summary.latencia_p95_ms)),
+        card("Tempo no ar", duration(summary.no_ar_segundos)),
+        card("Em andamento", integer.format(summary.em_andamento)),
+        card("Bloqueios", integer.format(summary.bloqueios), "Guardrail de entrada"),
+      ].join("");
+      byId("model-metrics").innerHTML = [
+        card("Tokens", integer.format(summary.tokens_total), `${integer.format(summary.tokens_entrada)} entrada · ${integer.format(summary.tokens_saida)} saída`),
+        card("Custo estimado", usdFormat.format(summary.custo_usd), "Estimativa por tabela fixa"),
+        card("Modelo mais usado", summary.modelo_mais_usado, "", true),
+        card("Fallbacks", integer.format(summary.fallbacks), "Especialista usou modelo alternativo"),
+      ].join("");
+      drawLine(byId("latency-chart"), data.serie_latencia.map((point) => ({ value: point.latencia_ms })), "#67e8c4", slo.latencia_p95_limite_ms);
+      drawLine(byId("cost-chart"), data.serie_custo.map((point) => ({ value: point.custo_acumulado_usd })), "#9b8afb", null, true);
+      byId("turns-table").innerHTML = table(
+        ["Hora", "Latência", "Rota", "Status", "Tokens", "Custo", "Sessão"],
+        data.turnos.map((turn) => [
+          { value: turn.hora }, { value: ms(turn.latencia_ms) }, { value: turn.rota },
+          { html: statusTag(turn.status) }, { value: integer.format(turn.tokens_total) },
+          { value: usdFormat.format(turn.custo_usd) }, { value: turn.session_id, className: "mono" },
+        ]),
+        "Nenhum turno neste processo.",
+      );
+      byId("models-table").innerHTML = table(
+        ["Modelo", "Chamadas", "Entrada", "Saída", "Custo", "Latência média"],
+        data.por_modelo.map((model) => [
+          { value: model.modelo, className: "mono" }, { value: integer.format(model.chamadas) },
+          { value: integer.format(model.tokens_entrada) }, { value: integer.format(model.tokens_saida) },
+          { value: usdFormat.format(model.custo_usd) }, { value: ms(model.latencia_media_ms) },
+        ]),
+        "Nenhuma chamada de modelo.",
+      );
+      byId("routes-table").innerHTML = table(
+        ["Rota", "Turnos", "Erros", "Latência média", "Custo"],
+        data.por_rota.map((route) => [
+          { value: route.rota }, { value: integer.format(route.turnos) },
+          { value: integer.format(route.erros) }, { value: ms(route.latencia_media_ms) },
+          { value: usdFormat.format(route.custo_usd) },
+        ]),
+        "Nenhuma rota registrada.",
+      );
+    }
+    async function load() {
+      const dot = byId("connection-dot");
+      try {
+        const response = await fetch("/monitor", { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        render(await response.json());
+        byId("warning").hidden = true;
+        dot.className = "dot ok";
+        byId("updated-at").textContent = `Atualizado ${new Date().toLocaleTimeString("pt-BR")} · atualização a cada 4 s`;
+      } catch (error) {
+        dot.className = "dot error";
+        byId("warning").hidden = false;
+        byId("warning").textContent = `Não foi possível consultar /monitor. A API está no ar? ${error.message}`;
+      }
+    }
+    byId("refresh").addEventListener("click", load);
+    window.addEventListener("resize", () => { if (lastData) render(lastData); });
+    load();
+    setInterval(load, 4000);
+  </script>
+</body>
+</html>

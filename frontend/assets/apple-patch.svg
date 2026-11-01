@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs>
+    <pattern id="cloth" width="7" height="7" patternUnits="userSpaceOnUse">
+      <rect width="7" height="7" fill="#c95749"/>
+      <path d="M0 1.5H7M0 5.5H7M1.5 0V7M5.5 0V7" stroke="#d96c60" stroke-width=".7" opacity=".38"/>
+    </pattern>
+    <pattern id="leafcloth" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="#8bae5d"/>
+      <path d="M0 3H6M3 0V6" stroke="#a7c47c" stroke-width=".6" opacity=".45"/>
+    </pattern>
+  </defs>
+  <path d="M88 37c10-16 26-20 40-15-7 18-21 28-39 27" fill="url(#leafcloth)" stroke="#557c42" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M79 46c2-11 4-19 3-27" fill="none" stroke="#77533b" stroke-width="7" stroke-linecap="round"/>
+  <path d="M82 48C58 34 34 46 27 74c-9 40 18 69 54 65 34 8 61-19 54-61-6-28-29-43-53-30Z" fill="url(#cloth)" stroke="#9e4037" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M37 69c10-13 23-17 36-15" fill="none" stroke="#f1a198" stroke-width="6" stroke-linecap="round" opacity=".65"/>
+  <path d="M51 123c18 10 42 12 64 1" fill="none" stroke="#f8e4d8" stroke-width="2.2" stroke-dasharray="4 5" opacity=".78"/>
+  <circle cx="63" cy="91" r="4.5" fill="#35503b"/>
+  <circle cx="102" cy="91" r="4.5" fill="#35503b"/>
+  <path d="M71 107c8 7 17 7 25 0" fill="none" stroke="#35503b" stroke-width="4" stroke-linecap="round"/>
+</svg>

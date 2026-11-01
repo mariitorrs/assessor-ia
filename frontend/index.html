@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#dfeaa7" />
+  <title>Assessor.ai — Seu cantinho</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Mali:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background-collage" aria-hidden="true">
+    <img class="sticker sticker--apple-one" src="assets/apple-sticker.svg" alt="" />
+    <img class="sticker sticker--apple-two" src="assets/apple-sticker.svg" alt="" />
+    <img class="sticker sticker--flower-one" src="assets/flower.svg" alt="" />
+    <img class="sticker sticker--flower-two" src="assets/flower.svg" alt="" />
+    <img class="sticker sticker--star-one" src="assets/star.svg" alt="" />
+    <img class="sticker sticker--star-two" src="assets/star.svg" alt="" />
+    <img class="sticker sticker--spiral-one" src="assets/spiral.svg" alt="" />
+    <img class="sticker sticker--spiral-two" src="assets/spiral.svg" alt="" />
+    <img class="sticker sticker--leaf" src="assets/leaf-sprig.svg" alt="" />
+  </div>
+
+  <main class="scrapbook-shell">
+    <aside class="side-card">
+      <div class="side-gingham" aria-hidden="true"></div>
+
+      <div class="sidebar-brand-card">
+        <div class="sidebar-brand-content">
+          <img class="sidebar-brand-apple" src="assets/apple-patch.svg" alt="" aria-hidden="true" />
+          <div class="sidebar-brand-copy">
+            <p>seu cantinho</p>
+            <h1>Assessor<span>.ai</span></h1>
+          </div>
+        </div>
+        <span class="sidebar-brand-star" aria-hidden="true">✦</span>
+      </div>
+
+      <div class="sidebar-status">
+        <span class="status-card__dot" id="status-dot" aria-hidden="true"></span>
+        <strong id="status-text">Prontinho</strong>
+      </div>
+
+      <div class="sidebar-note">
+        <span class="sidebar-note-tape" aria-hidden="true"></span>
+        <h2>chat de finanças +<br>agenda</h2>
+        <p>Organize seus gastos,<br>compromissos e lembretes em<br>uma conversa só.</p>
+      </div>
+
+      <div class="sidebar-session">
+        <div class="sidebar-session-title"><span>✿</span> SESSÃO ATUAL</div>
+        <code class="sidebar-session-id" id="session-id">—</code>
+        <button class="new-session" id="reset-session" type="button">
+          <span class="new-session__icon">↻</span>
+          Nova conversa
+        </button>
+      </div>
+
+      <div class="sidebar-apple-sticker" aria-hidden="true">
+        <img src="assets/apple-patch.svg" alt="" />
+      </div>
+
+
+
+      <img class="sidebar-bow" src="assets/bow-gingham.svg" alt="" aria-hidden="true" />
+      <img class="sidebar-patch-star" src="assets/star-patch.svg" alt="" aria-hidden="true" />
+    </aside>
+
+    <section class="chat-paper">
+      <div class="paper-tape paper-tape--left" aria-hidden="true"></div>
+      <div class="paper-tape paper-tape--right" aria-hidden="true"></div>
+
+      <header class="chat-header">
+        <div>
+          <p class="chat-header__eyebrow">Conversa</p>
+          <h2>Oiee! O que vamos organizar hoje?</h2>
+          <p class="chat-header__desc">Pode falar do seu jeito. Eu cuido do resto.</p>
+        </div>
+        <div class="header-doodles" aria-hidden="true">
+          <span>✦</span><span>♡</span><span>✿</span>
+        </div>
+      </header>
+
+      <div class="divider" aria-hidden="true">
+        <span>✦</span><span>♡</span><span>✿</span><span>♡</span><span>✦</span>
+      </div>
+
+      <section class="thread" id="thread" aria-live="polite">
+        <div class="welcome-card" id="thread-empty">
+          <div class="welcome-card__illustration" aria-hidden="true">
+            <img src="assets/apple-patch.svg" alt="" />
+          </div>
+          <div class="welcome-card__copy">
+            <span class="welcome-card__label">Assessor</span>
+            <h3>Me conta o que você precisa</h3>
+            <p>Posso registrar gastos, consultar suas finanças, organizar compromissos e lembrar do que vocês já conversaram.</p>
+            <div class="quick-actions" aria-label="Sugestões rápidas">
+              <button type="button" class="quick-action-with-icon" data-prompt="Gastei 25 reais com almoço hoje"><img src="assets/apple-patch.svg" alt="" aria-hidden="true"> <Ri:d></Ri:d> Registrar gasto</button>
+              <button type="button" data-prompt="Quais foram meus últimos gastos?">✿ Ver gastos</button>
+              <button type="button" data-prompt="Quero agendar um compromisso">🌿 Agendar algo</button>
+              <button type="button" data-prompt="O que eu te contei recentemente?">♡ Lembrar conversa</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="composer-wrap">
+        <form class="composer" id="composer" autocomplete="off">
+          <div class="composer__decor" aria-hidden="true">✿</div>
+          <textarea
+            id="pergunta"
+            class="composer__input"
+            rows="1"
+            placeholder="Digite aqui..."
+            aria-label="Digite sua mensagem"
+            required
+          ></textarea>
+          <button id="enviar" class="composer__send" type="submit" aria-label="Enviar mensagem">
+            <span>enviar</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h13M14 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </form>
+        <p class="hint" id="hint"></p>
+      </footer>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "assessor-financeiro": {
+      "command": "C:/Users/marianacosta-ieg/AppData/Local/Python/pythoncore-3.14-64/python.exe",
+      "args": [
+        "C:/Users/marianacosta-ieg/OneDrive - Instituto J&F/\u00c1rea de Trabalho/TECH/IA/2 semestre/Pr\u00e1tica - Projeto Assessor/app/mcp_server.py"
+      ]
+    }
+  }
+}
