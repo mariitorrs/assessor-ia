@@ -350,25 +350,6 @@ Projeto acadêmico em desenvolvimento, voltado a execução local e demonstraç�
 
 O acesso aos dados depende da configuração do ambiente. O `user_id` identifica contextos de perfil e memória, mas não equivale a autenticação; as ferramentas financeiras e de agenda desta versão consultam a base configurada sem isolamento por usuário. Uma disponibilização pública exige evolução do controle de acesso e da separação dos dados.
 
-## Antes de publicar no GitHub
-
-Mantenha fora do versionamento:
-
-```gitignore
-.env
-.venv/
-venv/
-__pycache__/
-*.py[cod]
-.pytest_cache/
-gcp-oauth.keys.json
-google-calendar.token.json
-```
-
-Publique apenas exemplos de configuração sem segredos. Revise também arquivos de configuração de clientes MCP para remover caminhos pessoais e credenciais. Se uma chave já tiver sido publicada, remova-a do histórico e revogue ou substitua a credencial.
-
-<img src="docs/assets/rodape.svg" width="1200" alt="Um espaço para organizar a rotina e construir novos aprendizados." />
-
 <div align="center">
 
 <sub>Desenvolvido no contexto do Ensino Médio Técnico da Germinare Tech.</sub>
